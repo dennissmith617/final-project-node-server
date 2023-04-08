@@ -1,6 +1,5 @@
 import * as usersDao from "./users-dao.js";
 
-let currentUser = null;
 
 function UsersController(app) {
     const findAllUsers = async (req, res) => {
@@ -33,17 +32,19 @@ function UsersController(app) {
             req.body.password
         );
         if (foundUser) {
-            currentUser = foundUser;
+            req.session["currentUser"] = foundUser;
             res.send(foundUser);
         } else {
             res.sendStatus(404);
         }
     };
     const logout = async (req, res) => {
-        currentUser = null;
+        req.session.destroy();
+        // currentUser = null;
         res.sendStatus(204);
     };
     const profile = async (req, res) => {
+        const currentUser = req.session["currentUser"];
         if (currentUser) {
             res.send(currentUser);
         } else {
@@ -57,7 +58,7 @@ function UsersController(app) {
             res.sendStatus(409);
         } else {
             const newUser = await usersDao.createUser(user);
-            currentUser = newUser;
+            req.session["currentUser"] = newUser;
             res.json(newUser);
         }
     };
