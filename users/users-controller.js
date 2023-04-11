@@ -40,7 +40,6 @@ function UsersController(app) {
     };
     const logout = async (req, res) => {
         req.session.destroy();
-        // currentUser = null;
         res.sendStatus(204);
     };
     const profile = async (req, res) => {
