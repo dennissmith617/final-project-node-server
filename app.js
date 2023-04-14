@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import UsersController from "./users/users-controller.js";
 import mongoose from "mongoose";
+import commentsController from "./comments/commentsController.js";
 
 mongoose.connect(
     "mongodb+srv://giuseppi:supersecretpassword@cluster0.kwknyiw.mongodb.net/?retryWrites=true&w=majority"
@@ -16,6 +17,7 @@ app.get("/", function (req, res) {
 });
 
 UsersController(app);
+commentsController(app)
 
 app.get("/hello/:message", function (req, res) {
     const message = req.params.message;
