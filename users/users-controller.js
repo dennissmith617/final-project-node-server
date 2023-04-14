@@ -71,6 +71,7 @@ function UsersController(app) {
     app.delete("/api/users/:id", deleteUserById);
     app.post("/api/users", createUser);
     app.put("/api/users/:id", updateUser);
+    app.get("/api/users/:id", findUserById)
 }
 
 export default UsersController;
