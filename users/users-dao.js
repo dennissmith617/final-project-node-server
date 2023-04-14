@@ -44,3 +44,12 @@ export const updateUser = async (id, user) => {
     const status = await usersModel.updateOne({ _id: id }, user);
     return status;
 };
+
+export const increaseBooksRead = async (id) => {
+    const status = await usersModel.updateOne({ _id: id }, {$inc:{booksRead: 1}});
+    return status;
+};
+export const decreaseBooksRead = async (id) => {
+    const status = await usersModel.updateOne({ _id: id }, {$inc:{booksRead: -1}});
+    return status;
+};

@@ -61,6 +61,17 @@ function UsersController(app) {
             res.json(newUser);
         }
     };
+    const increaseBooksRead = async (req, res) => {
+        const id = req.params.id;
+        const booksRead = await usersDao.increaseBooksRead(id);
+        res.send(booksRead);
+    };
+    const decreaseBooksRead = async (req, res) => {
+        const id = req.params.id;
+        const booksRead = await usersDao.decreaseBooksRead(id);
+        res.send(booksRead);
+    };
+
 
     app.post("/api/users/login", login);
     app.post("/api/users/logout", logout);
@@ -71,7 +82,9 @@ function UsersController(app) {
     app.delete("/api/users/:id", deleteUserById);
     app.post("/api/users", createUser);
     app.put("/api/users/:id", updateUser);
-    app.get("/api/users/:id", findUserById)
+    app.get("/api/users/:id", findUserById);
+    app.put("/api/users/increaseBookRead/:id", increaseBooksRead)
+    app.put("/api/users/decreaseBookRead/:id", decreaseBooksRead)
 }
 
 export default UsersController;
