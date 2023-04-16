@@ -31,10 +31,23 @@ const findBookRating = async (req, res) => {
     res.json(bookRating);
 }
 
+const updateComment = async (req, res) => {
+    const {_id, google_id, comment, username, rating} = req.body;
+    console.log('comment ', comment)
+    const  commentToUpdate = {_id, google_id, comment, username, rating}
+    const commentId = req.params._id;
+    const updatedComment  = await commentsDao.updateComment(commentId, commentToUpdate)
+    res.status(200).json({
+        msg:"comment updated successfully",
+        comment : updatedComment
+    });
+}
+
 export default (app) => {
     app.post('/api/comments', createComment);
     app.get('/api/comments/bookcomments/:google_id', findCommentsByBookId);
     app.get('/api/comments/usercomments/:username', findCommentsByUsername);
     app.get('/api/comments/bookRating/:google_id', findBookRating);
+    app.put('/api/comments/updateComment/:_id',updateComment)
     app.delete('/api/comments/:_id', deleteComment);
 }

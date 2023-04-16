@@ -16,7 +16,16 @@ export const findAllCommentsByUser = async (username) => {
     return comments;
 };
 
-//export const deleteComment = async (commentId) => commentsModel.deleteOne({_id: commentId});
+export const deleteComment = async (commentId) => commentsModel.deleteOne({_id: commentId});
+
+export const updateComment = async (commentId, NewComment) => {
+    console.log(NewComment)
+    const comment = await commentsModel.findByIdAndUpdate({_id:commentId}, {comment: NewComment.comment})
+    // await commentsModel.findByIdAndUpdate()
+    return comment
+}
+
+
 // export const readitBookRating = async (bookId) => {
 //     const bookRating = commentsModel.aggregate([
 //         {$match: {google_id : bookId}},

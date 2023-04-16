@@ -26,6 +26,7 @@ function UsersController(app) {
         const status = await usersDao.updateUser(id, req.body);
         res.json(status);
     };
+
     const login = async (req, res) => {
         const user = req.body;
         const foundUser = await usersDao.findUserByCredentials(
@@ -83,8 +84,8 @@ function UsersController(app) {
     app.post("/api/users", createUser);
     app.put("/api/users/:id", updateUser);
     app.get("/api/users/:id", findUserById);
-    app.put("/api/users/increaseBookRead/:id", increaseBooksRead)
-    app.put("/api/users/decreaseBookRead/:id", decreaseBooksRead)
+    app.put("/api/users/increaseBooksRead/:id", increaseBooksRead)
+    app.put("/api/users/decreaseBooksRead/:id", decreaseBooksRead)
 }
 
 export default UsersController;

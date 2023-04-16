@@ -34,7 +34,6 @@ export const deleteUser = async (id) => {
     const status = await usersModel.deleteOne({ _id: id });
     return status;
 };
-
 export const createUser = async (user) => {
     const newUser = await usersModel.create(user);
     return newUser;
@@ -48,6 +47,7 @@ export const updateUser = async (id, user) => {
 export const increaseBooksRead = async (id) => {
     const status = await usersModel.updateOne({ _id: id }, {$inc:{booksRead: 1}});
     return status;
+
 };
 export const decreaseBooksRead = async (id) => {
     const status = await usersModel.updateOne({ _id: id }, {$inc:{booksRead: -1}});
