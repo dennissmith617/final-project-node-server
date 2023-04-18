@@ -1,7 +1,10 @@
 import express from "express";
 import cors from "cors";
 import UsersController from "./users/users-controller.js";
+import PostsController from "./posts/posts-controller.js";
+import SessionController from "./session-controller.js";
 import mongoose from "mongoose";
+import session from "express-session";
 import commentsController from "./comments/commentsController.js";
 
 mongoose.connect(
@@ -9,16 +12,29 @@ mongoose.connect(
 );
 
 const app = express();
-app.use(cors());
+app.use(cors(
+    {
+        credentials: true,
+        origin: "http://localhost:3000"
+    }
+));
 app.use(express.json());
+app.use(
+    session({
+    secret: "test_secret",
+    resave: false,
+    cookie: {secure: false}
+    })
+);
 
 app.get("/", function (req, res) {
     res.send("Hello World");
 });
 
+SessionController(app);
+PostsController(app);
 UsersController(app);
-commentsController(app)
-
+commentsController(app);
 app.get("/hello/:message", function (req, res) {
     const message = req.params.message;
     res.send(`Hello ${message}`);
