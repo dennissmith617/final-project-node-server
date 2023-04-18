@@ -11,6 +11,11 @@ export const findAllCommentsByBook = async (google_id) => {
     return comments;
 };
 
+export const findAllComments = async (google_id) => {
+    const comments = await commentsModel.find();
+    return comments;
+};
+
 export const findAllCommentsByUser = async (username) => {
     const comments = await commentsModel.find({username: username});
     return comments;
