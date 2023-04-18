@@ -56,5 +56,5 @@ export default (app) => {
     app.get('/api/comments/usercomments/:username', findCommentsByUsername);
     app.get('/api/comments/bookRating/:google_id', findBookRating);
     app.put('/api/comments/updateComment/:_id',updateComment)
-    app.delete('/api/comments/:id', deleteComment);
+    app.delete('/api/comments/:_id', deleteComment);
 }
