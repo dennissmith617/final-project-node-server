@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import UsersController from "./users/users-controller.js";
-import PostsController from "./posts/posts-controller.js";
 import SessionController from "./session-controller.js";
 import mongoose from "mongoose";
 import commentsController from "./comments/commentsController.js";
@@ -32,7 +31,6 @@ app.get("/", function (req, res) {
 });
 
 SessionController(app);
-PostsController(app);
 UsersController(app);
 commentsController(app)
 
