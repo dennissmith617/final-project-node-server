@@ -24,9 +24,11 @@ export const findAllCommentsByUser = async (username) => {
 export const deleteComment = async (commentId) => commentsModel.deleteOne({_id: commentId});
 
 export const updateComment = async (commentId, NewComment) => {
-    console.log(NewComment)
-    const comment = await commentsModel.findByIdAndUpdate({_id:commentId}, {comment: NewComment.comment})
+    const comment = await commentsModel.findByIdAndUpdate({_id:commentId}, {comment: NewComment.comment, rating: NewComment.rating}, {returnDocument:"after"})
     // await commentsModel.findByIdAndUpdate()
+    // const updatedComment = await  co
+    console.log(comment)
+    console.log('comment')
     return comment
 }
 

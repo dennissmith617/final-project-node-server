@@ -3,6 +3,7 @@ import cors from "cors";
 import UsersController from "./users/users-controller.js";
 import SessionController from "./session-controller.js";
 import mongoose from "mongoose";
+import session from "express-session";
 import commentsController from "./comments/commentsController.js";
 import session from "express-session";
 
@@ -32,8 +33,7 @@ app.get("/", function (req, res) {
 
 SessionController(app);
 UsersController(app);
-commentsController(app)
-
+commentsController(app);
 app.get("/hello/:message", function (req, res) {
     const message = req.params.message;
     res.send(`Hello ${message}`);
