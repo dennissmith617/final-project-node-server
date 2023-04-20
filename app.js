@@ -5,7 +5,6 @@ import SessionController from "./session-controller.js";
 import mongoose from "mongoose";
 import session from "express-session";
 import commentsController from "./comments/commentsController.js";
-import session from "express-session";
 
 mongoose.connect(
     "mongodb+srv://giuseppi:supersecretpassword@cluster0.kwknyiw.mongodb.net/?retryWrites=true&w=majority"
