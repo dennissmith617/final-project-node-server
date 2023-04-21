@@ -20,18 +20,14 @@ export const deleteComment = async (commentId) => commentsModel.deleteOne({_id: 
 
 export const updateComment = async (commentId, NewComment) => {
     const comment = await commentsModel.findByIdAndUpdate({_id:commentId}, {comment: NewComment.comment, rating: NewComment.rating}, {returnDocument:"after"})
-    // await commentsModel.findByIdAndUpdate()
-    // const updatedComment = await  co
-    console.log(comment)
-    console.log('comment')
+
     return comment
 }
 
-
-// export const readitBookRating = async (bookId) => {
-//     const bookRating = commentsModel.aggregate([
-//         {$match: {google_id : bookId}},
-//         {$group:{
-//             bookRating:{$avg: "$rating"}}}]);
-//
-//     return bookRating}
+export const readitBookRating = async (bookId) => {
+    const bookRating = commentsModel.aggregate([
+        {$match: {google_id : bookId}},
+        {$group:{
+            _id: null,
+            bookRating:{$avg: "$rating"}}}]);
+    return bookRating}
