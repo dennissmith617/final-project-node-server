@@ -82,6 +82,12 @@ function UsersController(app) {
         res.send(bookReadStatus);
     };
 
+    const booksRead = async (req, res)=>{
+        const user_id = req.params;
+        const booksRead = await usersDao.booksRead(user_id);
+        res.send(booksRead)
+    }
+
 
     app.post("/api/users/login", login);
     app.post("/api/users/logout", logout);
@@ -97,6 +103,7 @@ function UsersController(app) {
     app.put("/api/users/bookread/:user_id/:google_id", bookRead)
     app.put("/api/users/bookunread/:user_id/:google_id", bookUnread)
     app.get("/api/users/bookreadstatus/:user_id/:google_id", bookReadStatus)
+    app.get("/api/users/booksread/:user_id",booksRead )
 }
 
 export default UsersController;

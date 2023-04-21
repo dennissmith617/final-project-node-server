@@ -58,3 +58,8 @@ export const bookReadStatus = async (user_id, google_id) => {
     const status = await usersModel.find({_id: user_id, booksRead: {$in: [google_id]}}).count()>0
     return status
 };
+
+export const booksRead = async (user_id) => {
+    const status = await usersModel.distinct("booksRead", {_id:user_id});
+    return status
+};
