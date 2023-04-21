@@ -44,12 +44,17 @@ export const updateUser = async (id, user) => {
     return status;
 };
 
-export const increaseBooksRead = async (id) => {
-    const status = await usersModel.updateOne({ _id: id }, {$inc:{booksRead: 1}});
+export const bookRead = async (user_id, google_id) => {
+    const status = await usersModel.findByIdAndUpdate({ _id: user_id }, {$push:{booksRead: google_id}});
     return status;
-
 };
-export const decreaseBooksRead = async (id) => {
-    const status = await usersModel.updateOne({ _id: id }, {$inc:{booksRead: -1}});
+
+export const bookUnread = async (user_id, google_id) => {
+    const status = await usersModel.updateOne({ _id: user_id }, {$pull:{booksRead: google_id}});
     return status;
+};
+
+export const bookReadStatus = async (user_id, google_id) => {
+    const status = await usersModel.find({_id: user_id, booksRead: {$in: [google_id]}}).count()>0
+    return status
 };
