@@ -4,6 +4,7 @@ const commentsSchema = new mongoose.Schema(
             comment: String,
             rating: Number,
             username: String,
+            userId: String,
             google_id: String,
             bookTitle: String
     }, {
