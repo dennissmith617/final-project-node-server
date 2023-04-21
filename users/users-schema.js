@@ -7,7 +7,7 @@ const usersSchema = new mongoose.Schema(
         lastName: String,
         email: { type: String, unique: true },
         age: Number,
-        booksRead: { type: Number, default: 0 },
+        booksRead: [{ type: String }],
         role: { type: String, default: "VIEWER", enum: ["VIEWER", "ADMIN", "CRITIC", "AUTHOR"] },
         profilePicture: {type: String, default: "/images/defaultProPic.jpeg"},
         followers: [{type: mongoose.Types.ObjectId}],

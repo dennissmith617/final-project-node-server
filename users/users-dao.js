@@ -34,7 +34,6 @@ export const deleteUser = async (id) => {
     const status = await usersModel.deleteOne({ _id: id });
     return status;
 };
-
 export const createUser = async (user) => {
     const newUser = await usersModel.create(user);
     return newUser;
@@ -43,4 +42,24 @@ export const createUser = async (user) => {
 export const updateUser = async (id, user) => {
     const status = await usersModel.updateOne({ _id: id }, user);
     return status;
+};
+
+export const bookRead = async (user_id, google_id) => {
+    const status = await usersModel.findByIdAndUpdate({ _id: user_id }, {$push:{booksRead: google_id}});
+    return status;
+};
+
+export const bookUnread = async (user_id, google_id) => {
+    const status = await usersModel.updateOne({ _id: user_id }, {$pull:{booksRead: google_id}});
+    return status;
+};
+
+export const bookReadStatus = async (user_id, google_id) => {
+    const status = await usersModel.find({_id: user_id, booksRead: {$in: [google_id]}}).count()>0
+    return status
+};
+
+export const booksRead = async (user_id) => {
+    const status = await usersModel.distinct("booksRead", {_id:user_id});
+    return status
 };

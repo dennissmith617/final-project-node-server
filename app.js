@@ -5,6 +5,7 @@ import PostsController from "./posts/posts-controller.js";
 import SessionController from "./session-controller.js";
 import mongoose from "mongoose";
 import session from "express-session";
+import commentsController from "./comments/commentsController.js";
 
 mongoose.connect(
     "mongodb+srv://giuseppi:supersecretpassword@cluster0.kwknyiw.mongodb.net/?retryWrites=true&w=majority"
@@ -33,7 +34,7 @@ app.get("/", function (req, res) {
 SessionController(app);
 PostsController(app);
 UsersController(app);
-
+commentsController(app);
 app.get("/hello/:message", function (req, res) {
     const message = req.params.message;
     res.send(`Hello ${message}`);
