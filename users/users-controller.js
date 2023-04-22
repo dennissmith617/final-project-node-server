@@ -1,4 +1,5 @@
 import * as usersDao from "./users-dao.js";
+import mongoose from "mongoose";
 
 
 function UsersController(app) {
@@ -49,6 +50,7 @@ function UsersController(app) {
     };
     const profile = async (req, res) => {
         const currentUser = req.session["currentUser"];
+        console.log(currentUser);
         if (currentUser) {
             res.send(currentUser);
         } else {
@@ -83,8 +85,13 @@ function UsersController(app) {
     };
 
     const booksRead = async (req, res)=>{
-        const user_id = req.params;
-        const booksRead = await usersDao.booksRead(user_id);
+        const username = req.params.user_id;
+        const booksRead = await usersDao.booksRead(username);
+        res.send(booksRead)
+    }
+    const booksReadByUid = async (req, res)=>{
+        const uid = req.params.uid;
+        const booksRead = await usersDao.booksReadbyUid(uid);
         res.send(booksRead)
     }
 
@@ -93,7 +100,6 @@ function UsersController(app) {
     app.post("/api/users/logout", logout);
     app.get("/api/users/profile", profile);
     app.post("/api/users/register", register);
-
     app.get("/api/users", findAllUsers);
     app.delete("/api/users/:id", deleteUserById);
     app.get("/api/users/username/:username", findUserByUsername);
@@ -104,6 +110,7 @@ function UsersController(app) {
     app.put("/api/users/bookunread/:user_id/:google_id", bookUnread)
     app.get("/api/users/bookreadstatus/:user_id/:google_id", bookReadStatus)
     app.get("/api/users/booksread/:user_id",booksRead )
+    app.get("/api/users/anon/booksread/:uid",booksReadByUid )
 }
 
 export default UsersController;

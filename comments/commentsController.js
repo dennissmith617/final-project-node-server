@@ -24,6 +24,11 @@ const findCommentsByUsername = async (req, res) => {
     const comments = await commentsDao.findAllCommentsByUser(username)
     res.json(comments);
 }
+const findCommentsByUserID = async (req, res) => {
+    const uid  = req.params.uid
+    const comments = await commentsDao.findAllCommentsByUserID(uid)
+    res.json(comments);
+}
  const deleteComment = async (req, res) => {
     const commentIdToDelete = req.params._id;
     const status = await commentsDao
@@ -54,7 +59,9 @@ export default (app) => {
     app.get('/api/comments', findAllComments);
     app.get('/api/comments/bookcomments/:google_id', findCommentsByBookId);
     app.get('/api/comments/usercomments/:username', findCommentsByUsername);
+    app.get('/api/comments/anon/usercomments/:uid', findCommentsByUserID);
     app.get('/api/comments/bookRating/:google_id', findBookRating);
     app.put('/api/comments/updateComment/:_id',updateComment)
     app.delete('/api/comments/bookcomments/:_id', deleteComment);
+
 }

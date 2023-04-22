@@ -1,4 +1,5 @@
 import usersModel from "./users-model.js";
+import mongoose from "mongoose";
 
 export const findAllUsers = async () => {
     const users = await usersModel.find();
@@ -60,6 +61,12 @@ export const bookReadStatus = async (user_id, google_id) => {
 };
 
 export const booksRead = async (user_id) => {
-    const status = await usersModel.distinct("booksRead", {_id:user_id});
+    console.log(user_id)
+    const status = await usersModel.distinct("booksRead", {username: user_id});
+    return status
+};
+export const booksReadbyUid = async (uid) => {
+    console.log(uid)
+    const status = await usersModel.distinct("booksRead", {_id:uid});
     return status
 };
