@@ -6,6 +6,9 @@ import mongoose from "mongoose";
 import session from "express-session";
 import commentsController from "./comments/commentsController.js";
 
+const URL_BASE = process.env.URL_NETLIFY;
+const READIT_URL_BASE = URL_BASE ? URL_BASE: "http://localhost:3000";
+
 mongoose.connect(
     "mongodb+srv://giuseppi:supersecretpassword@cluster0.kwknyiw.mongodb.net/?retryWrites=true&w=majority"
 );
@@ -14,7 +17,7 @@ const app = express();
 app.use(cors(
     {
         credentials: true,
-        origin: "http://localhost:3000"
+        origin: READIT_URL_BASE
     }
 ));
 app.use(express.json());
