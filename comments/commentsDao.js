@@ -20,7 +20,10 @@ export const findAllCommentsByUser = async (username) => {
     const comments = await commentsModel.find({username: username});
     return comments;
 };
-
+export const findAllCommentsByUserID = async (userid) => {
+    const comments = await commentsModel.find({userId: userid});
+    return comments;
+};
 export const deleteComment = async (commentId) => commentsModel.deleteOne({_id: commentId});
 
 export const updateComment = async (commentId, NewComment) => {
