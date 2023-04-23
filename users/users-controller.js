@@ -69,13 +69,13 @@ function UsersController(app) {
         }
     };
     const bookRead = async (req, res) => {
-        const {user_id, google_id} = req.params;
-        const booksRead = await usersDao.bookRead(user_id, google_id);
+        const {user_id, google_id, bookTitle} = req.params;
+        const booksRead = await usersDao.bookRead(user_id, google_id, bookTitle);
         res.send(booksRead);
     };
     const bookUnread = async (req, res) => {
-        const {user_id, google_id} = req.params;
-        const bookUnread = await usersDao.bookUnread(user_id, google_id);
+        const {user_id, google_id,bookTitle} = req.params;
+        const bookUnread = await usersDao.bookUnread(user_id, google_id,bookTitle);
         res.send(bookUnread);
     };
     const bookReadStatus = async (req, res) => {
@@ -106,8 +106,8 @@ function UsersController(app) {
     app.post("/api/users", createUser);
     app.put("/api/users/:id", updateUser);
     app.get("/api/users/:id", findUserById);
-    app.put("/api/users/bookread/:user_id/:google_id", bookRead)
-    app.put("/api/users/bookunread/:user_id/:google_id", bookUnread)
+    app.put("/api/users/bookread/:user_id/:google_id/:bookTitle", bookRead)
+    app.put("/api/users/bookunread/:user_id/:google_id/:bookTitle", bookUnread)
     app.get("/api/users/bookreadstatus/:user_id/:google_id", bookReadStatus)
     app.get("/api/users/booksread/:user_id",booksRead )
     app.get("/api/users/anon/booksread/:uid",booksReadByUid )
